@@ -14,10 +14,10 @@ export class SandBox {
 
   private prepare() {
     const child = exec(
-      `chmod 777 temp && mkdir ${this.path}/${this.folder} && cp src/payload/* ${this.path}/${this.folder}`,
+      `chmod 777 ${this.path}/temp && mkdir ${this.path}/temp/${this.folder} && cp ${this.path}/payload/* ${this.path}/temp/${this.folder}`,
       () => {
         writeFile(
-          `${this.path}/${this.folder}/${Date.now()}.js`,
+          `${this.path}/temp/${this.folder}/${Date.now()}.js`,
           this.code,
           err => {
             if (err) {
@@ -25,7 +25,7 @@ export class SandBox {
             } else {
               console.log('file saved');
               writeFile(
-                `${this.path}/${this.folder}/input.txt`,
+                `${this.path}/temp/${this.folder}/input.txt`,
                 this.stdin,
                 err => {
                   if (err) {
